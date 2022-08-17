@@ -11,7 +11,7 @@ var getRepoIssues = function (repo) {
 
                 // check if api has paginated issues
                 if (response.headers.get("Link")) {
-                    console.log("repo has more than 30 issues");
+                    displayWarning(repo);
                 }
             });
         }
@@ -50,3 +50,14 @@ var displayIssues = function (issues) {
         issueContainerEl.appendChild(issueEl);
     }
 }
+
+var displayWarning  = function(repo) {
+    limitWarningEl.textContent = "To see more than 30 issues, visit ";
+
+    var linkEl - document.createElement('a');
+    linkEl.textContent = "See more Issues on GitHub.com";
+    linkEl.setAttribute('href', "https://github.com/" + repo + "/issues");
+    linkEl.setAttribute('target', "_blank");
+
+    limitWarningEl.appendChild(linkEl);
+};
